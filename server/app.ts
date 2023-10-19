@@ -1,27 +1,12 @@
-import express, { Request, Response } from "express";
+import express from 'express';
+import admin from './routes/admin';
 
 const app = express();
-const PORT: 4000|5000|6000 = 5000
+const PORT:4000|5000|6000 = 4000;
 
-type Data = {
-    name: string;
-    age: number;
-    url: string;
-};
+app.use(express.json());
+app.use('/api', admin);
 
-const sendData: Data = {
-    name: "name",
-    age: 3,
-    url: "tistory.com",
-};
-
-app.get("/",(req:Request, res: Response) => {
-    res.send("hello world")
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-app.get("/get", (req: Request, res: Response) => {
-    res.send(sendData);
-});
-
-app.listen(PORT,() => {
-    console.log(`APP IS RUNNING ON ${PORT}`)
-})
